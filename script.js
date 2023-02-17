@@ -3,6 +3,8 @@
 // Cada card de amigo debería tener un botón para borrarlo de mis amigos si me peleo.
 // Debería tener un botón que permitiera borrar todos los amigos
 
+const crearId = () => Math.random().toString(36).substring(2, 18);
+
 const $formulario = document.getElementById("formulario");
 const $inputNombre = document.getElementById("nombre");
 const $inputImagen = document.getElementById("imagen");
@@ -11,14 +13,19 @@ const $botonEliminarTodo = document.getElementById("boton-eliminar-todo");
 // const $inputId = document.getElementById('idAmigo')
 const $inputId = document.querySelector("#idAmigo");
 const $botonSubmit = document.querySelector(".boton-submit");
-const $botonReset = document.querySelector(".boton-reset")
+const $botonReset = document.querySelector(".boton-reset");
 const $tituloFormulario = document.querySelector(".titulo-formulario");
-const $imagenPreview = document.querySelector("#idImagenPreview")
+const $imagenPreview = document.querySelector("#idImagenPreview");
 
-let amigos = [];
-const imageDefault = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeDkmja6hHPc4bVgZ7M7z5Nee_y-JiCx77CMJX6pW-wA&s"
+const amigosEnElLocalStorage = localStorage.getItem("amigos"); // obtenemos el JSON del almacenamiento local del navegador.
+const amigosConvertidosJS = JSON.parse(amigosEnElLocalStorage); // transformamos el JSON a Javascript
 
-const crearId = () => Math.random().toString(36).substring(2, 18);
+let amigos = amigosConvertidosJS !== null ? amigosConvertidosJS : []
+
+// CONDICIÓN ? VALOR SI ES VERDADERO : VALOR SI ES FALSO
+
+const imageDefault =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeDkmja6hHPc4bVgZ7M7z5Nee_y-JiCx77CMJX6pW-wA&s";
 
 const persistirAmigos = (infoAmigos) => {
   // convertimos de javascript a JSON
@@ -28,22 +35,13 @@ const persistirAmigos = (infoAmigos) => {
   localStorage.setItem("amigos", amigosFormatoJSON);
 };
 
-const amigosEnElLocalStorage = localStorage.getItem("amigos"); // obtenemos el JSON del almacenamiento local del navegador.
-const amigosConvertidosJS = JSON.parse(amigosEnElLocalStorage); // transformamos el JSON a Javascript
-
-if (amigosConvertidosJS !== null) {
-  // si el navegador tiene los amigos? entonces
-
-  amigos = amigosConvertidosJS; // la variable amigos va a ser igual a lo que tiene guardado mi navegador
-}
-
 $formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
   // si el input id oculto en la vista tiene valor entonces estamos en editar el amigo
-  if ($inputId.value !== "") { // CÓDIGO PARA ACTUALIZAR UN AMIGO
+  if ($inputId.value !== "") {
+    // CÓDIGO PARA ACTUALIZAR UN AMIGO
 
     amigos = amigos.map((amigo) => {
-
       if (amigo.id === $inputId.value) {
         const amigoModificado = {
           id: amigo.id,
@@ -53,21 +51,15 @@ $formulario.addEventListener("submit", function (evento) {
         return amigoModificado;
       }
 
-      return amigo
+      return amigo;
     });
-
-    persistirAmigos(amigos)
-    pintarAmigos();
-    $formulario.reset();
-    $imagenPreview.src = imageDefault 
 
     $botonSubmit.textContent = "Crear amigo";
     $botonSubmit.classList.remove("btn-success");
     $botonSubmit.classList.add("btn-primary");
-
     $tituloFormulario.textContent = "creación";
-
-  } else { // CÓDIGO PARA CREAR UN NUEVO AMIGO
+  } else {
+    // CÓDIGO PARA CREAR UN NUEVO AMIGO
     // si no estamos en creación de un amigo
     const nuevoAmigo = {
       id: crearId(),
@@ -76,15 +68,12 @@ $formulario.addEventListener("submit", function (evento) {
     };
 
     amigos.push(nuevoAmigo); // array amigos con un nuevo amigo agregado
-
-    persistirAmigos(amigos); // guardamos los amigos en el local storage
-
-    pintarAmigos(); // Pintamos los amigos en el DOM
-
-    $formulario.reset(); // reseteamos el formulario (inputs en blanco)
-    $imagenPreview.src = imageDefault // reset de la imagen
   }
 
+  persistirAmigos(amigos); // guardamos los amigos en el local storage
+  pintarAmigos(); // Pintamos los amigos en el DOM
+  $formulario.reset(); // reseteamos el formulario (inputs en blanco)
+  $imagenPreview.src = imageDefault; // reset de la imagen
 });
 
 const pintarAmigos = () => {
@@ -134,21 +123,23 @@ const editarAmigo = (id) => {
   $imagenPreview.src = amigoEncontrado.foto;
 
   $tituloFormulario.textContent = "actualización";
-  $botonReset.textContent = "Cancelar"
+  $botonReset.textContent = "Cancelar";
 };
 
-$inputImagen.addEventListener('change', () => { // Ejecutamos cuando ocurre un evento CHANGE
-  console.log($inputImagen.value)
-  $imagenPreview.src = $inputImagen.value
-})
+$inputImagen.addEventListener("change", () => {
+  // Ejecutamos cuando ocurre un evento CHANGE
+  console.log($inputImagen.value);
+  $imagenPreview.src = $inputImagen.value;
+});
 
-$imagenPreview.addEventListener('error',() => {  // CAPTURAMOS EL EVENTO ERROR DE LA IMAGEN QUE PREVISUALIZAMOS
-  $imagenPreview.src = imageDefault
-})
+$imagenPreview.addEventListener("error", () => {
+  // CAPTURAMOS EL EVENTO ERROR DE LA IMAGEN QUE PREVISUALIZAMOS
+  $imagenPreview.src = imageDefault;
+});
 
-$botonReset.addEventListener('click',() => {
+$botonReset.addEventListener("click", () => {
   $botonSubmit.textContent = "Crear amigo";
-  $botonReset.textContent = "Resetear"
+  $botonReset.textContent = "Resetear";
 
   $botonSubmit.classList.remove("btn-success");
   $botonSubmit.classList.add("btn-primary");
@@ -156,6 +147,6 @@ $botonReset.addEventListener('click',() => {
   $imagenPreview.src = imageDefault;
 
   $tituloFormulario.textContent = "creación";
-})
+});
 
 pintarAmigos();
