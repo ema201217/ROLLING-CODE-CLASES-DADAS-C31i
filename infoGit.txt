@@ -14,4 +14,13 @@
 
 5 - Realizar el commit 'git commit -m "comentario"'
 6 - Comprobamos estado del repositorio "git status"
-    * Si todo en verde queda solamente el "commit"
+    * Si te muestra este mensaje "On branch master nothing to commit, working tree clean" ya esta todo comiteado
+
+7 - Enlazar con el repositorio remoto "git remote add origin (urlRepositorioRemoto)"
+8 - Comprobar la vinculación local con la remota "git remote -v"
+
+
+// EXTRA - Cambiar el nombre de la rama actual //
+git branch -m "nuevo nombre"
+
+9 - Subimos al repositorio remoto todo los cambios "git push origin clase-apoyo-1"
