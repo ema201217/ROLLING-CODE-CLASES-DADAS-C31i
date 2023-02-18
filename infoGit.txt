@@ -1,0 +1,12 @@
+0 - CONFIGURAR LOCALMENTE GIT :
+   * git config --global user.name "nombre de usuario"
+   * git config --global user.email "email"
+
+1 - Crear repositorio local ->  git init
+
+2 - Para ignorar archivos no deseados se crea el archivo ".gitignore"
+   * Dentro colocar el nombre de lo que se quiere ignorar. (nombre de archivo o nombre de directorio)
+
+
+3 - Agregar a seguimiento "git add ."
+4 - Comprobamos estado del repositorio "git status"
