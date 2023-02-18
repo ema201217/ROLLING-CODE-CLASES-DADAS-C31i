@@ -24,3 +24,4 @@
 git branch -m "nuevo nombre"
 
 9 - Subimos al repositorio remoto todo los cambios "git push origin clase-apoyo-1"
+10 - Realizar un pull para traer los nuevos cambios
