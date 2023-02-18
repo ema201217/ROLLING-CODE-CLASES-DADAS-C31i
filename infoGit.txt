@@ -10,3 +10,8 @@
 
 3 - Agregar a seguimiento "git add ."
 4 - Comprobamos estado del repositorio "git status"
+    * Si todo en verde queda solamente el "commit"
+
+5 - Realizar el commit 'git commit -m "comentario"'
+6 - Comprobamos estado del repositorio "git status"
+    * Si todo en verde queda solamente el "commit"
