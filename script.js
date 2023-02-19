@@ -17,10 +17,13 @@ const $botonReset = document.querySelector(".boton-reset");
 const $tituloFormulario = document.querySelector(".titulo-formulario");
 const $imagenPreview = document.querySelector("#idImagenPreview");
 
+const $inputBuscador = document.querySelector("#input-buscador");
+const $formBuscador = document.querySelector(".formulario-busqueda");
+
 const amigosEnElLocalStorage = localStorage.getItem("amigos"); // obtenemos el JSON del almacenamiento local del navegador.
 const amigosConvertidosJS = JSON.parse(amigosEnElLocalStorage); // transformamos el JSON a Javascript
 
-let amigos = amigosConvertidosJS !== null ? amigosConvertidosJS : []
+let amigos = amigosConvertidosJS !== null ? amigosConvertidosJS : [];
 
 // CONDICIÓN ? VALOR SI ES VERDADERO : VALOR SI ES FALSO
 
@@ -147,6 +150,21 @@ $botonReset.addEventListener("click", () => {
   $imagenPreview.src = imageDefault;
 
   $tituloFormulario.textContent = "creación";
+});
+
+/* $inputBuscador  */
+$formBuscador.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  amigos = amigos.filter((amigo) => {
+    return amigo.nombre.includes($inputBuscador.value);
+  });
+  pintarAmigos();
+});
+
+$inputBuscador.addEventListener("keyup", () => {
+  amigos = amigosConvertidosJS;
+  pintarAmigos();
 });
 
 pintarAmigos();
