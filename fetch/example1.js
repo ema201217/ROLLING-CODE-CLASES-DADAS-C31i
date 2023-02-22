@@ -6,14 +6,14 @@
 // GET -> ejemplo: barra de urls en el navegador - No tiene seguridad
 // POST -> ejemplo: al registrarse o al iniciar sesión - Tiene mas seguridad
 
-let personajes
-const contenedorPersonajes = document.getElementById('sectionCharacters')
+let personajes;
+const $contenedorPersonajes = document.getElementById("sectionCharacters");
 
 const pintarPersonajes = (personajes = []) => {
-  contenedorPersonajes.innerHTML = '';
+  $contenedorPersonajes.innerHTML = "";
 
-  personajes.forEach(personaje => {
-    const {name,gender,image,species} = personaje
+  personajes.forEach((personaje) => {
+    const { name, gender, image, species } = personaje;
     const cardPersonaje = `
     <div class="card" style="width: 14rem;">
         <img src="${image}" class="card-img-top">
@@ -23,19 +23,17 @@ const pintarPersonajes = (personajes = []) => {
           <p class="card-text">GENERO: ${gender}</p>
         </div>
       </div>
-    `
-    
+    `;
+
+    $contenedorPersonajes.innerHTML += cardPersonaje;
+  });
+};
+
+fetch("https://rickandmortyapi.com/api/character")
+  .then((response) => response.json())
+  .then((data) => {
+    personajes = data.results;
+    pintarPersonajes(personajes);
+    // console.log(personajes)
   })
-
-}
-
-
-fetch('https://rickandmortyapi.com/api/character')
-.then((response) => response.json())
-.then((data) => {
-  personajes = data.results
-
-  console.log(personajes)
-})
-.catch(error => console.log(error))
-
+  .catch((error) => console.log(error));
