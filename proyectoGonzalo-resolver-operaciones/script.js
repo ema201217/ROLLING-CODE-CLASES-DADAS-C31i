@@ -26,7 +26,6 @@ const questionRandom = () => {
 
   const operations = ["+", "-", "*", "/"];
   const operationSelected = operations[Math.floor(Math.random() * 3)];
-  console.log(operationSelected);
 
   $primerNumero.textContent = numero1;
   $segundoNumero.textContent = numero2;
@@ -35,9 +34,8 @@ const questionRandom = () => {
   return { numero1, numero2, operationSelected };
 };
 
-const isCorrect = (operation, n1, n2, valueInput) => {
+/* const isCorrect = (operation, n1, n2, valueInput) => {
   let resultCorrect;
-
   switch (operation) {
     case "+":
       resultCorrect = n1 + n2;
@@ -52,8 +50,21 @@ const isCorrect = (operation, n1, n2, valueInput) => {
       resultCorrect = n1 / n2;
       break;
   }
-
   return resultCorrect === parseInt(valueInput);
+}; */
+
+const isCorrect = (operation, n1, n2, valueInput) => {
+  const valueParser = parseInt(valueInput);
+  switch (operation) {
+    case "+":
+      return n1 + n2 === valueParser;
+    case "-":
+      return n1 - n2 === valueParser;
+    case "*":
+      return n1 * n2 === valueParser;
+    case "/":
+      return n1 / n2 === valueParser;
+  }
 };
 
 const updateStatistics = ({ correct, incorrect, total }) => {
@@ -79,7 +90,8 @@ const showMsg = (typeMsg) => {
   }
 };
 
-const saveStatistics = () => localStorage.setItem("statistics", JSON.stringify(infoUser));
+const saveStatistics = () =>
+  localStorage.setItem("statistics", JSON.stringify(infoUser));
 
 const { numero1, numero2, operationSelected } = questionRandom();
 
@@ -101,9 +113,9 @@ $formulario.addEventListener("submit", (e) => {
     $formulario.reset();
   }
   updateStatistics(infoUser);
-  saveStatistics()
+  saveStatistics();
 });
 
-window.addEventListener('load',() => {
-    updateStatistics(infoUser);
-})
+window.addEventListener("load", () => {
+  updateStatistics(infoUser);
+});
