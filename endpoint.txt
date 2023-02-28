@@ -1,0 +1,10 @@
+api -> https://allsportsapi.com/register
+
+Endpoint Países
+https://apiv2.allsportsapi.com/football/?met=Countries&APIkey={{}}
+
+Endpoint Ligas
+https://apiv2.allsportsapi.com/football/?met=Leagues&countryId=10&APIkey={{}}
+
+Endpoint Equipos
+https://apiv2.allsportsapi.com/football?met=Teams&leagueId=33&APIkey={{}}
