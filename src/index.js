@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import { App } from "./App";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// const nombreCompleto = "Walter Tallia";
+// const saludo = <h1>Hola, {nombreCompleto}</h1>;
+
+// const listaDeAlumnos = (
+//   <div>
+//     <h1>Alumnos:</h1>
+//     <ul>
+//       <li>Fabricio Paz</li>
+//       <li>Gonzalo Flores</li>
+//       <li>Maria Huerta</li>
+//       <li>Rodrigo Singh</li>
+//       <li>Ezequiel Corbalan</li>
+//     </ul>
+//   </div>
+// );
+
+// const getFullname = (usuario) => {
+//   if (usuario) {
+//     return <h1>Hola, {usuario}</h1>;
+//   }
+//   return <h1>Hola, quien te conoce!!</h1>;
+// };
+
+// let loading = true
+// const fullname = getFullname("Gonzalo Flores")
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+ <App />
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
