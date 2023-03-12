@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { CounterV4 } from "./components/CounterV4";
+import { Header } from "./components/Header";
 
-function App() {
+export const App = () => {
+  const [mode, setMode] = useState("light")
+  const [checked,setChecked] = useState(false)
+
+  const toggleDarkMode = ({target}) => {
+    setMode(target.checked ? "dark" : "light" )
+    setChecked(target.checked)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Header modeActive={mode} onDarkMode={toggleDarkMode} checked={checked}/>
+
+      <CounterV4 />
     </div>
   );
 }
-
-export default App;
