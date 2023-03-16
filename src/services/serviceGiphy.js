@@ -23,10 +23,9 @@ export const getGiphy = async (keyword) => {
         limit: 12,
       },
     });
-    console.log(data.data);
+    
     return data.data
   } catch (error) {
-    console.log(error)
     return error.response.data
   }
 };

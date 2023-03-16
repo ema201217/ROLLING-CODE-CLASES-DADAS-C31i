@@ -1,12 +1,14 @@
-import { Card } from "react-bootstrap"
+import { Card, Col } from "react-bootstrap";
 
-export const CardItem = ({title,img}) => {
+export const CardItem = ({ title, image }) => {
   return (
-    <Card style={{ width: '12rem' }}>
-      <Card.Img variant="top" src="http://www.energyfit.com.mk/wp-content/plugins/ap_background/images/default/default_large.png" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-      </Card.Body>
-    </Card>
-  )
-}
+    <Col xs={12} sm={6} md={4} lg={3}>
+      <Card>
+        <Card.Img variant="top" src={image} style={{height:"200px",objectFit:'cover'}}/>
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+};

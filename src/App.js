@@ -1,43 +1,51 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { CardItem } from "./components/CardItem";
 import { Header } from "./components/Header";
+import { formatGiphy } from "./helpers/formatGiphy";
 import { getGiphy } from "./services/serviceGiphy";
-
 
 export const App = () => {
   /* listado de productos */
-  const arrProductos = ["TV 55'","Cafetera","Notebook","Smartphone"]
+  const arrProductos = ["TV 55'", "Cafetera", "Notebook", "Smartphone"];
 
-  const [keyword,setKeyword] = useState("")
-  const [gifs, setGifs] = useState([])
+  const [keyword, setKeyword] = useState("");
+  const [gifs, setGifs] = useState([]);
 
   const handleInputChange = (e) => {
-    setKeyword(e.target.value)
-  }
-  
-  const handleSearchGiphy = () => {
-    const gifsData = getGiphy(keyword);
-    // sacar lo que se necesita y luego 🔽
-    // seteo
-  }
+    setKeyword(e.target.value);
+  };
+
+
+
+  const handleSearchGiphy = async () => {
+    const gifsData = await getGiphy(keyword);
+    // 1 - sacar lo que se necesita y luego 🔽  ✔️
+    // 2 - seteo  ⁉️
+
+    // console.log(gifsData);
+    const gifsFormatted = formatGiphy(gifsData)
+    setGifs(gifsFormatted)
+  };
 
   return (
     <div className="">
-      <Header onInputValue={handleInputChange} onSearchGiphy={handleSearchGiphy}/>
+      <Header
+        onInputValue={handleInputChange}
+        onSearchGiphy={handleSearchGiphy}
+      />
 
       <h1 className="text-danger text-center my-4">Giphy</h1>
 
       <Container fluid>
-
-        {/* map, filter, reducer */}
+        <Row className="justify-content-center gap-2">
+          
+        {/* map, filter, reduce */}
         {
-         arrProductos.map((producto,index) => {
-          return <h2 key={index}>{producto}</h2>
-         })
+          gifs.map(gif => <CardItem title={gif.title} image={gif.image} key={gif.id}/>)
         }
-        
-        <CardItem /> {/* children */}
+
+        </Row>
       </Container>
     </div>
   );
