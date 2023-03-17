@@ -1,6 +1,6 @@
-import { Button, Form } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 
-export const SearchBar = ({onInputValue,onSearchGiphy}) => {
+export const SearchBar = ({onInputValue}) => {
 
   return (
     <Form className="d-flex">
@@ -11,7 +11,6 @@ export const SearchBar = ({onInputValue,onSearchGiphy}) => {
       aria-label="Search"
       onChange={onInputValue}
     />
-    <Button variant="outline-dark" onClick={onSearchGiphy}>Buscar</Button>
   </Form>
   )
 }

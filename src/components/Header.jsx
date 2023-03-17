@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { SearchBar } from "./SearchBar";
 
-export const Header = ({onInputValue, onSearchGiphy}) => {
+export const Header = ({onInputValue}) => {
 
   return (
     <Navbar bg="light" expand="lg">
@@ -18,7 +18,7 @@ export const Header = ({onInputValue, onSearchGiphy}) => {
           </Nav>
         </Navbar.Collapse>
 
-        <SearchBar onInputValue={onInputValue} onSearchGiphy={onSearchGiphy}/>
+        <SearchBar onInputValue={onInputValue}/>
       </Container>
     </Navbar>
   );
