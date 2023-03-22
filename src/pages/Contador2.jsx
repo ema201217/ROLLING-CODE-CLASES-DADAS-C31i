@@ -1,27 +1,13 @@
 import { useState, useEffect } from "react";
-import { Modal } from "./Modal";
+import { Layout } from "../components/Layout";
+import { useCounter } from "../hooks/useCounter";
 
-export const Contador3 = () => {
-  const [counter, setCounter] = useState(0);
+export const Contador2 = () => {
   const [inputValue, setInputValue] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [msgError, setMsgError] = useState("");
+  const { counter, increment, decrement, reset } = useCounter(0, inputValue);
 
-  const increment = () => {
-    setCounter(counter + inputValue);
-  };
-
-  const decrement = () => {
-    if (counter < 1) {
-      setShowModal(true);
-      setMsgError("No puedes decrementar a números negativos");
-    } else {
-      setCounter(counter - inputValue);
-    }
-  };
-
-  const reset = () => {
-    setCounter(0);
+  const handleReset = () => {
+    reset();
     setInputValue("");
   };
 
@@ -29,17 +15,10 @@ export const Contador3 = () => {
     const value = e.target.value;
 
     if (isNaN(value) || value === "") {
-      setShowModal(true);
-      setMsgError("Debes ingresar valores numéricos");
+      alert("Debes ingresar un numero");
     } else {
       setInputValue(parseInt(value));
     }
-  };
-
-  const handlerCloseModal = () => {
-    setShowModal(false);
-    setMsgError("");
-    reset()
   };
 
   useEffect(() => {
@@ -47,13 +26,7 @@ export const Contador3 = () => {
   }, [inputValue]);
 
   return (
-    <div>
-      <Modal
-        title="Error ❌"
-        msg={msgError}
-        showModal={showModal}
-        onClose={handlerCloseModal}
-      />
+    <Layout>
       <div className="card m-auto" style={{ width: "18rem" }}>
         <div className="card-body">
           <h2 className="card-title display-2">{counter}</h2>
@@ -82,7 +55,7 @@ export const Contador3 = () => {
 
             <button
               className="btn btn-dark btn-sm"
-              onClick={reset}
+              onClick={handleReset}
               disabled={!inputValue}
             >
               Reset
@@ -90,6 +63,6 @@ export const Contador3 = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
