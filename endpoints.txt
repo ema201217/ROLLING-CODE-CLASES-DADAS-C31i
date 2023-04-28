@@ -1,0 +1,20 @@
+// Entity products
+
+// /products --> getProducts --> GET 🆗
+
+// /products/:idProduct --> getProductById --> GET 🆗
+
+
+// /products?q=${keyword} --> searchProduct --> GET
+
+// /products --> createProduct --> POST
+
+// /products/2 -->  deleteProduct --> DELETE
+
+// /products/${idProduct}  --> updateProduct --> PUT
+
+// Entity users
+
+// /users/login --> login --> POST
+
+// /users/register --> register --> POST

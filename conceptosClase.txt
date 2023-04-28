@@ -1,0 +1,18 @@
+/* import express from 'express; */
+/* export const server = app */
+
+
+
+
+
+
+// req -> request es lo que recibimos del cliente
+// res -> response es la respuesta que le damos al cliente
+app.get('/',(req, res) => {  
+  // res.send('ESTOY EN EL ENDPOINT INDEX') // .send --> Envía datos a la vista
+
+  res.json({
+    nombre:"Maria",
+    edad: null
+  })
+})
