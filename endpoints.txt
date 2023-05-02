@@ -5,13 +5,13 @@
 // /products/:idProduct --> getProductById --> GET 🆗
 
 
-// /products?q=${keyword} --> searchProduct --> GET
+// /products?q=${keyword} --> searchProduct --> GET🆗
 
-// /products --> createProduct --> POST
+// /products --> createProduct --> POST🆗
 
-// /products/2 -->  deleteProduct --> DELETE
+// /products/2 -->  deleteProduct --> DELETE🆗
 
-// /products/${idProduct}  --> updateProduct --> PUT
+// /products/2  --> updateProduct --> PUT🆗
 
 // Entity users
 
