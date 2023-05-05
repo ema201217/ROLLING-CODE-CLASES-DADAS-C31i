@@ -5,7 +5,7 @@
 // /products/:idProduct --> getProductById --> GET 🆗
 
 
-// /products?q=${keyword} --> searchProduct --> GET🆗
+// /products?q=samsung --> searchProduct --> GET🆗
 
 // /products --> createProduct --> POST🆗
 
@@ -15,6 +15,6 @@
 
 // Entity users
 
-// /users/login --> login --> POST
+// /users/login --> login --> POST🆗
 
-// /users/register --> register --> POST
+// /users/register --> register --> POST🆗

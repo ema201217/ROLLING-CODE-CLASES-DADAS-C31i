@@ -17,9 +17,14 @@ const ProductSchema = new mongoose.Schema({
   },
   discount: {
     type: Number,
+    default: 0
   },
   images: {
     type: Array,
+  },
+  available: {
+    type: Boolean,
+    default: false,
   },
 });
 

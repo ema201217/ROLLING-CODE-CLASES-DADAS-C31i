@@ -44,16 +44,102 @@ module.exports = {
       });
     }
   },
-  createProduct: (req, res) => {
-    res.json({ mensaje: "Creando producto" });
+  createProduct: async (req, res) => {
+    // req.body es un objeto que trae info desde el cliente
+    try {
+      const { name, description, price, discount, images } = req.body;
+
+      if (!name || !description || !price || !images) {
+        return res.json({
+          ok: false,
+          message: "Todos los campos son requeridos",
+        });
+      }
+
+      const product = await Product.create({
+        name,
+        description,
+        price,
+        discount,
+        images,
+      });
+
+      res.status(201).json({
+        ok: true,
+        data: product,
+      });
+    } catch (error) {
+      res.status(500).json({
+        ok: false,
+        message: error.message,
+      });
+    }
   },
-  deleteProduct: (req, res) => {
-    // req.query
-    // req.body
-    // req.params
-    res.json({ mensaje: "Producto eliminado" });
+  deleteProduct: async (req, res) => {
+    try {
+      const { idProduct } = req.params;
+      const { deletedCount } = await Product.deleteOne({ _id: idProduct });
+
+      if (deletedCount === 0) {
+        return res.status(404).json({
+          ok: false,
+          message: "El producto no existe | ya fue eliminado",
+        });
+      }
+
+      res.status(200).json({
+        ok: true,
+        message: "Producto eliminado",
+        isDelete,
+      });
+    } catch (error) {
+      res.status(500).json({
+        ok: false,
+        message: error.message,
+      });
+    }
   },
-  updateProduct: (req, res) => {
-    res.json({ mensaje: "Producto editado" });
+  updateProduct: async (req, res) => {
+    try {
+      const { name, description, price, discount, images } = req.body;
+      const { idProduct } = req.params;
+      /* const {matchedCount} = await Product.updateOne(
+        { _id: idProduct },
+        { name, description, price, discount, images }
+      );
+      if(matchedCount === 0){
+        return res.status(404).json({
+          ok:false,
+          message: "El producto no existe"
+        })
+      } */
+      const product = await Product.findById(idProduct)
+
+      if(!product){
+        return res.status(404).json({
+          ok:false,
+          message: "El producto no existe"
+        })
+      }
+
+      product.name = name
+      product.description = description
+      product.price = price
+      product.discount = discount
+      product.images = images
+      await product.save()
+
+
+      res.status(200).json({
+        ok:true,
+        message: "Producto actualizado",
+        data: product
+      })
+    } catch (error) {
+      res.status(500).json({
+        ok: false,
+        message: error.message,
+      });
+    }
   },
 };
