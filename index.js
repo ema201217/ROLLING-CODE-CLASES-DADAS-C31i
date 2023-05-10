@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config()
 const {
   getProducts,
   detailProduct,
@@ -14,8 +15,6 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json()) // middleware a nivel aplicación
 
-
-
 connectionMongo()
 // Entidades: Productos
 app.get("/products",getProducts); // <-- controlador
@@ -28,6 +27,7 @@ app.put("/products/:idProduct", updateProduct);
 app.post("/users/login", login);
 app.post("/users/register", register);
 
-app.listen(3030, () => {
-  console.log("http://localhost:3030");
+const port = process.env.PORT
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
 });

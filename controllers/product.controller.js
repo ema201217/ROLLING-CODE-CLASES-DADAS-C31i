@@ -22,7 +22,7 @@ module.exports = {
       const products = await Product.find(options);
       res.status(200).json({
         ok: true,
-        quantity: products.length,
+        // quantity: products.length,
         data: products,
       });
     } catch (error) {
@@ -35,8 +35,15 @@ module.exports = {
   detailProduct: async (req, res) => {
     try {
       const { idProduct } = req.params; // 6451a73c6c4ce11c7e55f05c
-      const productFound = await Product.findById(idProduct);
-      res.status(200).json({ product: productFound });
+      const productFound = await Product.findById(idProduct); 
+
+      if (!productFound) {
+        return res.status(404).json({
+          ok: false,
+          message: "El producto no existe"
+        })
+      }
+      res.status(200).json({ ok: true, data: productFound });
     } catch (error) {
       res.status(500).json({
         ok: false,
@@ -67,6 +74,7 @@ module.exports = {
       res.status(201).json({
         ok: true,
         data: product,
+        message: "Producto creado con éxito!!"
       });
     } catch (error) {
       res.status(500).json({
@@ -89,8 +97,7 @@ module.exports = {
 
       res.status(200).json({
         ok: true,
-        message: "Producto eliminado",
-        isDelete,
+        message: "Producto eliminado con éxito"
       });
     } catch (error) {
       res.status(500).json({
@@ -103,21 +110,12 @@ module.exports = {
     try {
       const { name, description, price, discount, images } = req.body;
       const { idProduct } = req.params;
-      /* const {matchedCount} = await Product.updateOne(
-        { _id: idProduct },
-        { name, description, price, discount, images }
-      );
-      if(matchedCount === 0){
-        return res.status(404).json({
-          ok:false,
-          message: "El producto no existe"
-        })
-      } */
+
       const product = await Product.findById(idProduct)
 
-      if(!product){
+      if (!product) {
         return res.status(404).json({
-          ok:false,
+          ok: false,
           message: "El producto no existe"
         })
       }
@@ -131,7 +129,7 @@ module.exports = {
 
 
       res.status(200).json({
-        ok:true,
+        ok: true,
         message: "Producto actualizado",
         data: product
       })

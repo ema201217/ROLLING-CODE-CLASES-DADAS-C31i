@@ -34,7 +34,7 @@ module.exports = {
       // JSON WEB TOKEN CREATE
       const token = jwt.sign(
         { rol: user.rol, email: user.email },
-        "PALABRASECRETA",
+        process.env.PASSWORD_SECRET,
         {
           expiresIn: "1h",
         }
@@ -84,7 +84,8 @@ module.exports = {
 
       res.status(201).json({
         ok: true,
-        message: "Usuario creado",
+        message: "Usuario creado con éxito",
+        message2: "Deben activar tu cuenta",
         data: newUser,
       });
     } catch (error) {
