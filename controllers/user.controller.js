@@ -36,7 +36,7 @@ module.exports = {
         { rol: user.rol, email: user.email },
         process.env.PASSWORD_SECRET,
         {
-          expiresIn: "1h",
+          expiresIn: 500,
         }
       );
 
@@ -92,6 +92,32 @@ module.exports = {
       res.status(500).json({
         ok: false,
         message: error.message,
+      });
+    }
+  },
+  getUser: async (req, res) => {
+    try {
+      if (req.userToken) {
+        const user = await User.findOne({
+          email: req.userToken.email,
+        });
+
+        if (!user) {
+          return res.status(404).json({
+            ok: false,
+            message: "El usuario no existe",
+          });
+        }
+
+        res.status(200).json({
+          ok: true,
+          data: user,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        ok: true,
+        message: "Error de servidor",
       });
     }
   },
