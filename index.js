@@ -6,7 +6,8 @@ const {
   detailProduct,
   createProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  toggleProduct
 } = require("./controllers/product.controller");
 const { login, register,getUser } = require("./controllers/user.controller");
 const app = express();
@@ -41,6 +42,7 @@ const checkToken = (req, res, next) => {
 connectionMongo();
 // Entidades: Productos
 app.get("/products", getProducts); // <-- controlador
+app.get("/products/toggle/:idProduct", checkToken,toggleProduct); // <-- controlador
 app.post("/products", checkToken, createProduct);
 app.get("/products/:idProduct", detailProduct);
 app.delete("/products/:idProduct", checkToken, deleteProduct);
