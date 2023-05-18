@@ -15,6 +15,7 @@ export const Home = () => {
     fetch(`${HOST_SERVER}/products`)
       .then((res) => res.json())
       .then(({ ok, data }) => {
+        console.log(data)
         ok ? setProducts(data) : null;
         setSlidesToShow(data.length === 1 ? 1 : Math.round(data.length / 3));
       })

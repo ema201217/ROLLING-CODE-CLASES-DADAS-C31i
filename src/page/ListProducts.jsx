@@ -33,7 +33,7 @@ export const ListProducts = () => {
         <Row>
           {products.map((product) => {
             return (
-              <Col key={product.id} md={4} lg={3}>
+              <Col key={product._id} md={4} lg={3}>
                 <Card style={{ width: "15rem" }} className="my-4 mx-auto">
                   <Card.Img
                     variant="top"
