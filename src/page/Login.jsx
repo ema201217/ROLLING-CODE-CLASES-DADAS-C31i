@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/userContext";
-
+const HOST_SERVER = import.meta.env.VITE_HOST_SERVER;
 const ContainerButton = styled.div`
   display: flex;
   justify-content: space-between;
@@ -42,7 +42,7 @@ export const Login = () => {
       return;
     }
 
-    const res = await fetch(`http://localhost:3030/users/login`, {
+    const res = await fetch(`${HOST_SERVER}/users/login`, {
       method: 'POST',
       body: JSON.stringify({
         email,

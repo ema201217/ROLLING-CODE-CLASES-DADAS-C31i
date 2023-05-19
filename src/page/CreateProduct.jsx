@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { UserContext } from "../contexts/userContext";
+const HOST_SERVER = import.meta.env.VITE_HOST_SERVER;
 
 const imageDefault =
   "https://farmateambg.com/wp-content/plugins/ecommerce-product-catalog/img/no-default-thumbnail.png";
@@ -92,7 +93,7 @@ export const CreateProduct = () => {
       return;
     }
 
-    fetch("http://localhost:3030/products", {
+    fetch(`${HOST_SERVER}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

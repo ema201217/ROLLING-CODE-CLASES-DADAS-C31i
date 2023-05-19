@@ -6,7 +6,7 @@ import { useState } from "react";
 import bcrypt from 'bcryptjs'
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+const HOST_SERVER = import.meta.env.VITE_HOST_SERVER;
 const ContainerButton = styled.div`
   display: flex;
   justify-content: space-between;
@@ -70,7 +70,7 @@ export const Register = () => {
       available: false
     };
 
-    fetch("http://localhost:3030/users/register", {
+    fetch(`${HOST_SERVER}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

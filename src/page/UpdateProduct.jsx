@@ -13,7 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { UserContext } from "../contexts/userContext";
-
+const HOST_SERVER = import.meta.env.VITE_HOST_SERVER;
 const imageDefault =
   "https://farmateambg.com/wp-content/plugins/ecommerce-product-catalog/img/no-default-thumbnail.png";
 
@@ -110,7 +110,7 @@ export const UpdateProduct = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3030/products/${idProduct}`)
+    fetch(`${HOST_SERVER}/products/${idProduct}`)
       .then((res) => res.json())
       .then(({ data, ok }) => (ok ? setProduct(data) : null));
   }, []);
@@ -118,7 +118,7 @@ export const UpdateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3030/products/${idProduct}`, {
+    fetch(`${HOST_SERVER}/products/${idProduct}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

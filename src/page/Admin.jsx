@@ -44,7 +44,7 @@ export const Admin = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:3030/products/${id}`, {
+          fetch(`${serverHost}/products/${id}`, {
             method: "DELETE",
             headers: {
               Authorization: token,

@@ -6,7 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { UserContext } from "../contexts/userContext";
-
+const HOST_SERVER = import.meta.env.VITE_HOST_SERVER;
 export const DetailProduct = () => {
   const mySwal = withReactContent(Swal);
   const redirect = useNavigate();
@@ -15,7 +15,7 @@ export const DetailProduct = () => {
   const { user, token } = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`http://localhost:3030/products/${idProduct}`)
+    fetch(`${HOST_SERVER}/products/${idProduct}`)
       .then((res) => res.json())
       .then(({ data, ok }) => (ok ? setProduct(data) : null))
       .catch((err) => console.error(err));
@@ -40,7 +40,7 @@ export const DetailProduct = () => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:3030/products/${idProduct}`, {
+          fetch(`${HOST_SERVER}/products/${idProduct}`, {
             method: "DELETE",
             headers: {
               'Authorization': token,
